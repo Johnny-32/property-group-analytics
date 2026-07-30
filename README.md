@@ -17,4 +17,6 @@
 
 ## To do:
 - Finish testing variables
+- Add None protected variables
+- Add more functions to clean up code
 - Think about is df be the best for 2d data?
