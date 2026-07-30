@@ -63,13 +63,15 @@ def otodom_parse(url):
     
     detail_div_list = [div.text for div in soup.find_all("div", class_="css-1okys8k e178zspo0")]
     
-    interior_area = detail_div_list[1]
+    interior_area = detail_div_list[1].split()[0]
 
     number_of_rooms = detail_div_list[3]
         
     property_type = None
     
     year_of_construction = None
+    
+    owner_expenses = None
         
     if "Mieszkanie" in property_type_header:
         property_type = "Apartment"
@@ -81,8 +83,8 @@ def otodom_parse(url):
         floor_number = detail_div_list[7]
         floor_number = floor_number.replace("parter/", "0/")
         
-        owner_expenses = detail_div_list[9]
-        owner_expenses = owner_expenses.replace("/miesiąc", "")
+        # owner_expenses = detail_div_list[9]
+        # owner_expenses = owner_expenses.replace("/miesiąc", "")
         
         for i, detail in enumerate(detail_div_list):
             if "balkon" in detail:
@@ -99,10 +101,17 @@ def otodom_parse(url):
                     is_elevator = False                
             if "taras" in detail:
                 is_terrace = True
+                
             if "Rok budowy:" in detail:
                 current_idx = i
                 if detail_div_list[current_idx + 1].isnumeric():
                     year_of_construction = detail_div_list[current_idx + 1]
+            
+            if "Czynsz:" in detail:
+                current_idx = i
+                if any(char.isdigit() for char in detail_div_list[current_idx + 1]):
+                    owner_expenses = detail_div_list[current_idx + 1].replace("/miesiąc", "")
+
         
     if "Dom" in property_type_header:
         property_type_temp = detail_div_list[5]
@@ -130,19 +139,29 @@ def otodom_parse(url):
             if "Liczba pięter:" in detail:
                 current_idx = i
                 if any(char.isdigit() for char in detail_div_list[current_idx + 1]):
-                    number_of_floors = detail_div_list[current_idx + 1]
-                    number_of_floors = number_of_floors.split(" ")
-                    number_of_floors = number_of_floors[0]
+                    number_of_floors = detail_div_list[current_idx + 1].split()[0]
             
             if "Powierzchnia działki:" in detail:
                 current_idx = i
                 if any(char.isdigit() for char in detail_div_list[current_idx + 1]):
                     plot_area = detail_div_list[current_idx + 1]
-                    plot_area = plot_area.split(" ")
-                    plot_area = plot_area[0]
+                    plot_area = plot_area.split(" ")[0]
                     
 
-
+    print("Test dla mieszkania:")
+    print(f"interior_area: {interior_area}")
+    print(f"number_of_rooms: {number_of_rooms}")
+    print(f"property_type: {property_type}")
+    print(f"is_balcony: {is_balcony}")
+    print(f"is_basement: {is_basement}")
+    print(f"is_elevator: {is_elevator}")
+    print(f"is_terrace: {is_terrace}")
+    print(f"floor_number: {floor_number}")
+    print(f"year_of_construction: {year_of_construction}")
+    print(f"owner_expenses: {owner_expenses}")
+    
+    
+    
 
             
 
@@ -150,6 +169,5 @@ def otodom_parse(url):
     
     
 otodom_parse(
-    # "https://www.otodom.pl/pl/oferta/przepieknie-wykonczone-po-remoncie-3-pok-lsm-bez-piecyka-ID4BT2w"
-    "https://www.otodom.pl/pl/oferta/dom-w-komfortowej-lokalizacji-na-wyzwolenia-ID4zraw"
+    "https://www.otodom.pl/pl/oferta/4-pokoje-blisko-centrum-idealne-dla-rodziny-lub-inwestora-ID4Bt11"
 )
