@@ -14,6 +14,7 @@
 - Add a final price (with all the taxes and fees if possible)
 - For now I'm focusing on houses-alike and apartments, in the future maybe I'll add support for rooms, plots of land
 - Add explanations for owner_expenses, beacuse they mean something different in pretty much every country
+- Add different color schemes for properties (like in hemnet.se, boligsiden.dk)
 
 ## To do:
 - Finish testing variables
