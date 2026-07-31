@@ -40,6 +40,7 @@
 - Add different color schemes for properties (like in hemnet.se, boligsiden.dk)
 
 ## To do:
+- Store useful commands like: python -m pipreqs.pipreqs . --encoding=utf-8 --ignore .venv,venv --force
 - Finish testing variables
 - Add None protected variables
 - Add more functions to clean up code
