@@ -1,5 +1,28 @@
 # Property group analytics
 
+## Property details
+- Address
+  - Is it an exact location or only street name
+- Price
+  - Is it in national currency or something different
+- Interior area
+- Number of rooms
+- Property type
+- Year of construction
+- Owner expenses
+- Plot area
+
+### For an apartment
+- Balcony
+- Basement
+- Terrace
+- Elevator
+- Owner expenses
+
+### For a house
+- Number of floors
+- Plot area
+
 ## Future features
 - Adding property details like adress, price, interior area, ..., just by pasting a link to the property
 - Comparing groups of properties in an attractive manner (two column layout for bigger screens)
